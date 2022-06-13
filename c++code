@@ -1,0 +1,29 @@
+
+class Solution{
+  public:
+  int fun (int id,int t,vector<vector<int>>&dp,int p[])
+  {
+      if(id==0)//rod lenth ==1;
+      {
+         return t*p[0]; 
+      }
+      
+      if(dp[id][t]!=-1)return dp[id][t];
+      int ntake=fun(id-1,t,dp,p);
+      int take=INT_MIN;
+      
+    int rl=id+1;
+     if(rl<=t)//if rod leth is smaller than target array then take it
+     //and reduce the target value
+     take=p[id]+fun(id,t-rl,dp,p);
+    
+      
+      return dp[id][t]=max(take,ntake);
+  }
+    int cutRod(int p[], int n) {
+        
+       
+        vector<vector<int>>dp(n,vector<int>(n+1,-1));
+        return fun(n-1,n,dp,p);
+    }
+};
